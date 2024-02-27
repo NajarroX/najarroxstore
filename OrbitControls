@@ -1,0 +1,39 @@
+// Creamos una escena, una cámara y un renderizador
+const scene = new THREE.Scene();
+const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+const renderer = new THREE.WebGLRenderer();
+renderer.setSize(window.innerWidth, window.innerHeight);
+document.getElementById('model-container').appendChild(renderer.domElement);
+
+// Añadimos luces
+const ambientLight = new THREE.AmbientLight(0xffffff, 0.5);
+scene.add(ambientLight);
+const directionalLight = new THREE.DirectionalLight(0xffffff, 0.5);
+scene.add(directionalLight);
+
+// Creamos un loader para cargar el modelo GLB
+const loader = new THREE.GLTFLoader();
+loader.load('modelo.glb', (gltf) => {
+    const model = gltf.scene;
+    scene.add(model);
+});
+
+// Añadimos controles de órbita para poder mover la cámara alrededor del modelo
+const controls = new THREE.OrbitControls(camera, renderer.domElement);
+
+// Hacemos que la cámara mire hacia el modelo
+camera.position.z = 5;
+
+// Función para renderizar la escena
+function animate() {
+    requestAnimationFrame(animate);
+    renderer.render(scene, camera);
+}
+animate();
+
+// Evento para girar el modelo al mover el mouse
+document.addEventListener('mousemove', (event) => {
+    const rotationSpeed = 0.01;
+    scene.rotation.y = (event.clientX - window.innerWidth / 2) * rotationSpeed;
+    scene.rotation.x = (event.clientY - window.innerHeight / 2) * rotationSpeed;
+});
