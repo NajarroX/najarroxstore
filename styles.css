@@ -39,6 +39,7 @@ body, html {
     list-style-type: none;
     margin: 0;
     padding: 0;
+    padding-right: 30px;
     text-align: center;
 }
 
@@ -86,3 +87,60 @@ section#productos {
 section#contacto {
     background-color: #e57eff; /* Color de fondo para la sección Contacto */
 }
+.mobile-menu-icon {
+    display: none;
+    flex-direction: column;
+    cursor: pointer;
+}
+
+.mobile-menu-icon .bar {
+    width: 25px;
+    height: 3px;
+    background-color: #fff;
+    margin: 3px 0;
+}
+
+.mobile-menu {
+    display: none;
+    position: fixed;
+    top: 60px; /* Alinea el menú con el header */
+    left: 0;
+    width: 100%;
+    background-color: #333;
+    padding: 20px;
+    box-sizing: border-box; /* Incluye el padding en el cálculo del ancho */
+}
+
+.mobile-menu nav ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.mobile-menu nav ul li {
+    margin-bottom: 10px;
+}
+
+.mobile-menu nav ul li a {
+    color: #fff;
+    text-decoration: none;
+}
+
+.close-menu {
+    background-color: #f00;
+}
+@media screen and (max-width: 768px) {
+    .nav-menu {
+        display: none; /* Oculta el menú principal en dispositivos móviles */
+    }
+
+    .mobile-menu-icon {
+        display: flex; /* Muestra el icono de hamburguesa en dispositivos móviles */
+        padding-right: 30px;
+    }
+
+    .fullscreen {
+        height: calc(100vh - 60px); /* Resta la altura del menú desplegable del 100% del viewport height */
+    }
+}
+
+
